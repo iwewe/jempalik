@@ -1,0 +1,63 @@
+body {
+    font-family: Verdana;
+    font-size: 11pt;
+    background-color: #535353;
+}
+
+#pgDiv {
+    position: absolute;
+    left: 50%;
+    width: 800px;
+    margin-left: -410px;
+    background-color: #ffffff;
+    padding-left: 25px;
+    padding-top: 6px;
+}
+
+textarea.inputBox {
+    color: #555577;
+    width: 770px;
+    padding-left: 8px;
+    overflow: auto;
+    font-family: "Arial Unicode MS", Batang, tahoma;
+    font-size: 12pt;
+}
+
+h1 {
+    color: #993300;
+    font-family: georgia;
+    margin-top: 0px;
+    font-weight: normal;
+    margin-bottom: 8px;
+}
+
+.l {
+    font-weight: normal;
+    color: #993300;
+}
+
+.g {
+    color: #aaa;
+    font-size: 0.7em;
+}
+
+a:link, a:visited {
+    color: #888888;
+}
+
+a.ref:link {
+    font-size: 10pt;
+    text-decoration: none;
+}
+
+a.ref:visited {
+    font-size: 10pt;
+    text-decoration: none;
+}
+
+.phrase {
+    display: inline;
+    padding-left: 5px;
+    font-style: italic;
+    color: #555;
+}
