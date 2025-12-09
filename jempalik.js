@@ -1,20 +1,30 @@
+const originalInput = document.getElementById('original');
+const flippedOutput = document.getElementById('i');
+const charCount = document.getElementById('charCount');
+const toast = document.getElementById('toast');
+
 function flip() {
-    var result = flipString(document.f.original.value.toLowerCase());
-    document.f.flipped.value = result;
+    const source = (originalInput?.value || '').toLowerCase();
+    const result = flipString(source);
+
+    if (flippedOutput) {
+        flippedOutput.value = result;
+    }
+    updateCharCount(source.length);
 }
 
 function flipString(aString) {
-    var last = aString.length - 1;
-    var result = new Array(aString.length);
-    for (var i = last; i >= 0; --i) {
-        var c = aString.charAt(i);
-        var r = flipTable[c];
-        result[last - i] = r != undefined ? r : c;
+    const last = aString.length - 1;
+    const result = new Array(aString.length);
+    for (let i = last; i >= 0; --i) {
+        const c = aString.charAt(i);
+        const r = flipTable[c];
+        result[last - i] = r !== undefined ? r : c;
     }
     return result.join('');
 }
 
-var flipTable = {
+const flipTable = {
     a: '\u0250',
     b: 'q',
     c: '\u0254',
@@ -51,11 +61,53 @@ var flipTable = {
     '\u2234': '\u2235'
 };
 
-for (var i in flipTable) {
-    flipTable[flipTable[i]] = i;
+for (const key in flipTable) {
+    flipTable[flipTable[key]] = key;
+}
+
+function clearText() {
+    if (originalInput) {
+        originalInput.value = '';
+        originalInput.focus();
+    }
+    if (flippedOutput) {
+        flippedOutput.value = '';
+    }
+    updateCharCount(0);
+}
+
+function copyFlipped() {
+    const text = flippedOutput?.value || '';
+    if (!text) return;
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(showToast);
+    } else {
+        SelectAll('i');
+        document.execCommand('copy');
+        showToast();
+    }
+}
+
+function showToast() {
+    if (!toast) return;
+    toast.classList.add('visible');
+    setTimeout(() => toast.classList.remove('visible'), 1400);
+}
+
+function updateCharCount(count) {
+    if (charCount) {
+        charCount.textContent = `${count} karakter`;
+    }
 }
 
 function SelectAll(id) {
-    document.getElementById(id).focus();
-    document.getElementById(id).select();
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.focus();
+    el.select();
+}
+
+if (originalInput) {
+    originalInput.focus();
 }
